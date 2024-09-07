@@ -1,16 +1,16 @@
 
-import { Routes, Route, Outlet } from "react-router-dom";
-import Home from "path/to/pages/Home";
-import Movies from "path/to/pages/Movies";
-import MovieDetailsPage from "path/to/pages/MovieDetailsPage";
+import { Routes, Route } from "react-router-dom";
+// import Home from "path/to/pages/Home/Home";
+// import Movies from "path/to/pages/Movies/Movies";
+// import MovieDetailsPage from "path/to/pages/MovieDetailsPage/MovieDetailsPage";
 
 
-// import Home from "../../pages/Home/Home";
-// import Movies from "../../pages/Movies/Movies";
-// import Movies from "../../pages/Movies";
+import Home from "../../pages/Home/Home";
+import Movies from "../../pages/Movies/Movies";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
-// import MovieDetailsPage from "../../pages/Movies/MovieDetailsPage/MovieDetailsPage";
+import MovieDetailsPage from "../../pages/MovieDetailsPage/MovieDetailsPage";
 
 
 
@@ -20,12 +20,12 @@ function App() {
   const [searchString, setSearchString] = useState("");
 
 
-  // Определяем функцию вне useEffect
+
   const getListHome = () => {
     const url = 'https://api.themoviedb.org/3/trending/movie/day?api_key=2b48341452ebcab69d38b1a5ce364348';
     // const options = {
     //   headers: {
-    //     Authorization: 'Bearer 2b48341452ebcab69d38b1a5ce364348'  // Добавьте 'Bearer ' перед вашим ключом
+    //     Authorization: 'Bearer 2b48341452ebcab69d38b1a5ce364348'  
     //   }
     // };
 
@@ -35,16 +35,16 @@ function App() {
   };
 
   useEffect(() => {
-    // Вызываем функцию внутри useEffect
+  
     getListHome();
   }, []);
   const getListSearch = (searchVal) => {
-    // Correctly format the URL with the search value
+  
     const url = `https://api.themoviedb.org/3/search/movie?api_key=2b48341452ebcab69d38b1a5ce364348&query=${encodeURIComponent(searchVal)}`;
   
     axios.get(url)
       .then(response => {
-        // Use `results` instead of `result`
+       
         const movies = response.data.results.map(({ title, release_date, poster_path, popularity, overview, id, genre_ids }) => ({
           title,
           release_date,
@@ -95,15 +95,12 @@ function App() {
 
 
   return (
-    <Routes>
-      <Route path="/" element={<Home listMovies={listMovies} />} />
-      {/* <Route path="/home" element={<Home />} /> */}
-      <Route path="/movies" element={<Movies searchString = {searchString} listMoviesBySearch = {listMoviesBySearch} SubmitOn={SubmitOn}  SearchValInput={ SearchValInput}/>} >
-         <Route path=":movieId" element={<MovieDetailsPage />} />
-         {/* <Route path="/movies" element={<Movies />} />
-         <Route path="/movies" element={<Movies />} /> */}
-      </Route>
-    </Routes>
+<Routes>
+  <Route path="/" element={<Home listMovies={listMovies} />} />
+  <Route path="/movies" element={<Movies searchString={searchString} listMoviesBySearch={listMoviesBySearch} SubmitOn={SubmitOn} SearchValInput={SearchValInput} />} />
+  <Route path="/movies/:movieId" element={<MovieDetailsPage />} />
+
+</Routes>
   );
 }
 

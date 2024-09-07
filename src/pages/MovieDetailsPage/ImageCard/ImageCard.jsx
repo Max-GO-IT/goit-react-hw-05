@@ -4,9 +4,8 @@ const ImageCard = ({ image }) => {
   return (
     <div className={css.imageCard}>
       <img
-        
-        src={image.urls.small}
-        alt={image.alt_description}
+        src={image}
+        alt="Movie Poster"
         className={css.image}
       />
     </div>

@@ -8,7 +8,7 @@ const Navbar = () => {
       <ul>
         <li>
           <NavLink 
-            to="/home" 
+            to="/" 
             exact 
             className="nav-link" 
             activeClassName="active">
