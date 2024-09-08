@@ -1,0 +1,22 @@
+.movieDetails {
+  padding: 20px;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.nav {
+  margin: 20px 0;
+}
+
+.link {
+  margin-right: 10px;
+  text-decoration: none;
+  color: blue;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

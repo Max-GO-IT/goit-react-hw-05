@@ -1,5 +1,5 @@
 import css from './MovieDetailsPage.module.css';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import ImageCard from './ImageCard/ImageCard';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -35,15 +35,20 @@ const MovieDetailsPage = () => {
         <div className={css.movieDetails}>
             {movieDetails ? (
                 <>
-                    <h1>{movieDetails.title}</h1>
-                    <ImageCard image={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} />
+                     <h1>{movieDetails.title}</h1>
+                    <ImageCard style={{ width: "auto", height: "auto" }}  image={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} />
                     <p>{movieDetails.overview}</p>
-                    <Link to={`/movies/${movieId}/cast`} className={css.link}>Cast</Link>
-                    <Link to={`/movies/${movieId}/reviews`} className={css.link}>Reviews</Link>
+                    <nav>
+                        <Link to={`/movies/${movieId}/cast`} className={css.link}>Cast</Link>
+                        <Link to={`/movies/${movieId}/reviews`} className={css.link}>Reviews</Link>
+                    </nav>
+                    <Outlet /> {/* Вставка вложенных маршрутов */}
                 </>
             ) : (
                 <p>No movie details available</p>
             )}
+           
+               
         </div>
     );
 }

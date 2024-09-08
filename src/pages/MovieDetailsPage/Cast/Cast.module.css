@@ -1,0 +1,23 @@
+.castContainer {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .castList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .castItem {
+    margin-bottom: 20px;
+  }
+  
+  .castItem h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+  }
+  
+  .castItem p {
+    font-size: 1rem;
+    color: #555;
+  }
