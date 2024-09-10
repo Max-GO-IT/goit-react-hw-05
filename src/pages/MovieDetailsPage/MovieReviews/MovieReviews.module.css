@@ -1,0 +1,17 @@
+
+.reviewsContainer {
+    padding: 20px;
+}
+
+.reviewsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.reviewItem {
+    margin-bottom: 15px;
+}
+
+.error {
+    color: red;
+}

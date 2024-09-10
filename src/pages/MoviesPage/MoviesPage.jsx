@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import css from './Movies.module.css';
 import Navbar from "../../components/NavBar/Navbar";
-import SearchBar from '../Movies/SearchBar/SearchBar';
+import SearchBar from './SearchBar/SearchBar';
 import ListMovies from '../../components/ListMovies/ListMovies';
 import axios from 'axios';
 

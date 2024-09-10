@@ -1,9 +1,9 @@
-import css from './Reviews.module.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import css from './MovieReviews.module.css'
 
-const Reviews = () => {
+const MovieReviews = () => {
     const { movieId } = useParams();
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -47,7 +47,7 @@ const Reviews = () => {
     );
 };
 
-export default Reviews;
+export default MovieReviews;
 
 
 
