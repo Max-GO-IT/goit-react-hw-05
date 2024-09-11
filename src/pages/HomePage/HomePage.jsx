@@ -1,8 +1,3 @@
-// import { lazy, Suspense } from "react";
-import {Link} from "react-router-dom";
-// const Navbar = lazy(() => import("../../components/NavBar/Navbar"));
-
-import Navbar from "../../components/NavBar/Navbar";
 import ListMovies from "../../components/ListMovies/ListMovies";
 import { useEffect,useState } from "react";
 import axios from "axios";
@@ -28,7 +23,7 @@ const Home = () => {
   }, []);
     return (
       <>
-        <Navbar />
+       
         <ListMovies listMovies = {listMovies}/>
       </>
     );
