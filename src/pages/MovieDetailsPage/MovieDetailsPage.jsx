@@ -1,21 +1,39 @@
-import css from './MovieDetailsPage.module.css'; // Убедитесь, что используете правильный путь к файлу
-import { Link, Outlet } from 'react-router-dom';
+import css from './MovieDetailsPage.module.css';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState, useRef  } from 'react';
+
+//import { useNavigate } from 'react-router-dom';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
+  const location = useLocation();
   const [movieDetails, setMovieDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
+  const prevLocationRef = useRef(location);
 
   const handleGoBack = () => {
-    navigate(-1);
+    // navigate(-1);
+   
+    const prevLocation = prevLocationRef.current;
+    if (prevLocation.state?.from) {
+
+      window.history.back();
+
+    } else { 
+
+      window.location.href = '/';
+
+    }
   };
+
+  useEffect(() => {
+    prevLocationRef.current = location;
+  }, [location]);
+
 
   useEffect(() => {
     const fetchMovieDetails = async () => {

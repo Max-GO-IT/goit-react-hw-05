@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom'; 
+import { useSearchParams,useLocation } from 'react-router-dom'; 
 import SearchBar from './SearchBar/SearchBar';
 import ListMovies from '../../components/ListMovies/ListMovies';
 import axios from 'axios';
 
 const MoviesPage = () => {
+    const location = useLocation();
     const [searchParams, setSearchParams] = useSearchParams(); 
     const [isLoading, setIsLoading] = useState(true);
     const [listMoviesBySearch, setListMoviesBySearch] = useState([]);
     
     const [searchString, setSearchString] = useState(() => {
-      return  searchParams.get('query') ||localStorage.getItem('searchString')|| "";
+    //  return  searchParams.get('query') ||localStorage.getItem('searchString')|| "";
+    return  searchParams.get('query') || location.state?.from?.search?.split('=')[1]||"";
   });
     
    
@@ -40,7 +42,7 @@ const MoviesPage = () => {
 
 
     useEffect(() => {
-      localStorage.setItem('searchString', searchString);
+    //  localStorage.setItem('searchString', searchString);
         if (searchString) {
             getListSearch(searchString);
         } else {
@@ -49,7 +51,14 @@ const MoviesPage = () => {
             
 
         }
-    }, [searchString,searchParams]);
+    }, [searchParams]);
+
+    useEffect(()=> {
+
+      setSearchParams({ query: searchString }); 
+
+    },[searchString])
+
     const SubmitOn = () => {
         setSearchParams({ query: searchString }); 
     };
