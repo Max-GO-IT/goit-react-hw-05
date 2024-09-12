@@ -1,4 +1,4 @@
-import ListMovies from "../../components/ListMovies/ListMovies";
+import MovieList from "../../components/MovieList/MovieList";
 import { useEffect,useState } from "react";
 import axios from "axios";
 
@@ -24,7 +24,7 @@ const Home = () => {
     return (
       <>
        
-        <ListMovies listMovies = {listMovies}/>
+        <MovieList listMovies = {listMovies}/>
       </>
     );
   }

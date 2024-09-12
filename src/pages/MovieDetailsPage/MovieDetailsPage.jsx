@@ -1,9 +1,8 @@
+// src/components/MovieDetailsPage.jsx
 import css from './MovieDetailsPage.module.css';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useEffect, useState, useRef  } from 'react';
-
-//import { useNavigate } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -12,28 +11,12 @@ const MovieDetailsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  //const navigate = useNavigate();
   const prevLocationRef = useRef(location);
 
-  const handleGoBack = () => {
-    // navigate(-1);
-   
-    const prevLocation = prevLocationRef.current;
-    if (prevLocation.state?.from) {
-
-      window.history.back();
-
-    } else { 
-
-      window.location.href = '/';
-
-    }
-  };
 
   useEffect(() => {
     prevLocationRef.current = location;
   }, [location]);
-
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -57,9 +40,12 @@ const MovieDetailsPage = () => {
 
   return (
     <div className={css.movieDetails}>
-      <button onClick={handleGoBack}>
+      <Link
+        to={prevLocationRef.current.state?.from?.pathname || '/'}
+        className={css.goBackLink}
+      >
         ← Go Back
-      </button>
+      </Link>
 
       {movieDetails ? (
         <>
@@ -76,7 +62,7 @@ const MovieDetailsPage = () => {
             <Link to={`/movies/${movieId}/cast`} className={css.link}>Cast</Link>
             <Link to={`/movies/${movieId}/reviews`} className={css.link}>Reviews</Link>
           </nav>
-          <Outlet /> {/* Вставка вложенных маршрутов */}
+          <Outlet />
         </>
       ) : (
         <p>No movie details available</p>

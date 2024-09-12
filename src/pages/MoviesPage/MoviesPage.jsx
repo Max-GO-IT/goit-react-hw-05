@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams,useLocation } from 'react-router-dom'; 
 import SearchBar from './SearchBar/SearchBar';
-import ListMovies from '../../components/ListMovies/ListMovies';
+import MovieList from '../../components/MovieList/MovieList';
 import axios from 'axios';
 
 const MoviesPage = () => {
@@ -79,7 +79,7 @@ const MoviesPage = () => {
             {isLoading ? (
                 <p>Loading...</p>
             ) : listMoviesBySearch.length > 0 ? (
-                <ListMovies listMovies={listMoviesBySearch} />
+                <MovieList listMovies={listMoviesBySearch} />
             ) : (
                 <p>No movies found</p>
             )}
