@@ -1,22 +1,19 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams,useLocation } from 'react-router-dom'; 
+import { useSearchParams } from 'react-router-dom'; 
 import SearchBar from './SearchBar/SearchBar';
 import MovieList from '../../components/MovieList/MovieList';
 import axios from 'axios';
 
 const MoviesPage = () => {
-    const location = useLocation();
     const [searchParams, setSearchParams] = useSearchParams(); 
     const [isLoading, setIsLoading] = useState(true);
     const [listMoviesBySearch, setListMoviesBySearch] = useState([]);
     
-    const [searchString, setSearchString] = useState(() => {
-    //  return  searchParams.get('query') ||localStorage.getItem('searchString')|| "";
-    return  searchParams.get('query') || location.state?.from?.search?.split('=')[1]||"";
-  });
-    
-   
+    const query = searchParams.get("query") ?? "";
+
     const getListSearch = (searchVal) => {
+        if (!searchVal) return; 
+
         const url = `https://api.themoviedb.org/3/search/movie?api_key=2b48341452ebcab69d38b1a5ce364348&query=${encodeURIComponent(searchVal)}`;
 
         axios.get(url)
@@ -39,43 +36,20 @@ const MoviesPage = () => {
             });
     };
 
-
-
     useEffect(() => {
-    //  localStorage.setItem('searchString', searchString);
-        if (searchString) {
-            getListSearch(searchString);
-        } else {
-            setListMoviesBySearch([]);
-            setIsLoading(false); 
-            
-
+        if (query) {
+            getListSearch(query);
         }
-    }, [searchParams]);
+    }, [query]);
 
-    useEffect(()=> {
-
-      setSearchParams({ query: searchString }); 
-
-    },[searchString])
-
-    const SubmitOn = () => {
-        setSearchParams({ query: searchString }); 
-    };
-
-    const SearchValInput = (e) => {
-        setSearchString(e.target.value); 
-        
+    const SubmitOn = (query) => {
+        setSearchParams({ query }); 
     };
 
     return (
         <>
             <p>Movies</p>
-            <SearchBar 
-                searchString={searchString} 
-                SubmitOn={SubmitOn} 
-                SearchValInput={SearchValInput} 
-            />
+            <SearchBar SubmitOn={SubmitOn} />
             {isLoading ? (
                 <p>Loading...</p>
             ) : listMoviesBySearch.length > 0 ? (
